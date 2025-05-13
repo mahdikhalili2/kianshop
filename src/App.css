@@ -1,60 +1,41 @@
-/* تنظیمات کلی کانتینر اصلی */
 .kianshop-container {
     width: 100%;
-    max-width: 1400px; /* کاهش max-width برای لپ‌تاپ‌های کوچک‌تر */
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 0 15px;
+    padding: 0 16px;
     box-sizing: border-box;
 }
 
-/* تنظیمات گرید محصولات */
 .products-grid {
     display: grid;
-    gap: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
     width: 100%;
+    margin-top: 24px;
 }
 
-/* تنظیمات کارت محصولات */
 .product-card {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #ddd;
+    background: #fff;
     border-radius: 8px;
-    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    padding: 16px;
+    box-sizing: border-box;
+    width: 100%;
 }
 
-/* تنظیمات ریسپانسیو برای اندازه‌های مختلف صفحه */
-@media (max-width: 767px) {
+@media (max-width: 900px) {
+    .kianshop-container {
+        max-width: 100%;
+        padding: 0 8px;
+    }
     .products-grid {
-        grid-template-columns: 1fr; /* تک‌ستونی برای موبایل */
-    }
-    .product-card {
-        width: 100%;
-    }
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-    .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* دو ستون یا بیشتر با حداقل عرض */
-    }
-    .product-card {
-        width: 100%;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 16px;
     }
 }
 
-@media (min-width: 992px) {
+@media (max-width: 600px) {
     .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* سه ستون یا بیشتر با حداقل عرض */
-    }
-    .product-card {
-        width: 100%;
-    }
-}
-
-/* تنظیمات برای لپ‌تاپ‌های با رزولوشن متوسط (اختیاری) */
-@media (min-width: 1200px) {
-    .products-grid {
-        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); /* عرض بیشتر برای کارت‌ها در صفحات بزرگ */
+        grid-template-columns: 1fr;
     }
 }
