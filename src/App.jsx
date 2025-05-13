@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { FaWhatsapp, FaTelegram } from 'react-icons/fa';
-import './App.css'; // فراموش نکن این خط را اضافه کنی
+import laptop1 from './images/laptop1.png';
+import laptop2 from './images/laptop1.png';
+import laptop3 from './images/laptop1.png';
+import './App.css';
 
 function Header() {
   return (
@@ -46,14 +49,13 @@ export default function App() {
   const [compareList, setCompareList] = useState([]);
   const [expandedLaptopId, setExpandedLaptopId] = useState(null);
 
-  // عکس‌های واقعی لپ‌تاپ (نمونه)
   const laptops = [
     {
       id: 1,
       name: "لپتاپ ایسوس مدل X509JA",
       brand: "ASUS",
       category: "کاربری عمومی",
-      image: "https://cdn.productimages.ir/2023/04/06/9d9b2b2e.jpg",
+      image: laptop1,
       specs: {
         processor: "Intel Core i5-1135G7",
         ram: "8GB DDR4",
@@ -68,7 +70,7 @@ export default function App() {
       name: "لپتاپ لنوو ThinkPad E14",
       brand: "Lenovo",
       category: "بیزینس",
-      image: "https://cdn.productimages.ir/2023/04/06/7e0a9e7b.jpg",
+      image: laptop2,
       specs: {
         processor: "AMD Ryzen 5 5500U",
         ram: "16GB DDR4",
@@ -83,7 +85,7 @@ export default function App() {
       name: "لپتاپ دل Inspiron 15",
       brand: "Dell",
       category: "کاربری عمومی",
-      image: "https://cdn.productimages.ir/2023/04/06/2b0f9d3a.jpg",
+      image: laptop3,
       specs: {
         processor: "Intel Core i7-1165G7",
         ram: "16GB DDR4",
