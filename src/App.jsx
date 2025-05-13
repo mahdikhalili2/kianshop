@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaWhatsapp, FaTelegram } from 'react-icons/fa';
+import './App.css'; // فراموش نکن این خط را اضافه کنی
 
 function Header() {
   return (
@@ -20,17 +21,11 @@ function Header() {
 
 function Footer() {
   return (
-    <footer style={{
-      background: '#222',
-      color: '#fff',
-      padding: '32px 0 16px 0',
-      textAlign: 'center',
-      marginTop: '40px'
-    }}>
-      <div style={{ marginBottom: '12px', fontSize: '1.1rem' }}>
+    <footer>
+      <div className="footer-contact">
         آدرس: تهران، خیابان مثال، پلاک ۱۲۳ | تلفن: ۰۲۱-۱۲۳۴۵۶۷۸
       </div>
-      <div style={{ display: 'flex', justifyContent: 'center', gap: '24px', fontSize: '2rem' }}>
+      <div className="footer-icons">
         <a href="https://wa.me/989123456789" target="_blank" rel="noopener noreferrer" title="واتساپ" style={{ color: '#25D366' }}>
           <FaWhatsapp />
         </a>
@@ -38,7 +33,7 @@ function Footer() {
           <FaTelegram />
         </a>
       </div>
-      <div style={{ marginTop: '14px', fontSize: '0.9rem', color: '#aaa' }}>
+      <div className="footer-copy">
         © {new Date().getFullYear()} kianshop. همه حقوق محفوظ است.
       </div>
     </footer>
@@ -58,7 +53,7 @@ export default function App() {
       name: "لپتاپ ایسوس مدل X509JA",
       brand: "ASUS",
       category: "کاربری عمومی",
-      image: "https://cdn.productimages.ir/2023/04/06/9d9b2b2e.jpg", // عکس لپ‌تاپ واقعی
+      image: "https://cdn.productimages.ir/2023/04/06/9d9b2b2e.jpg",
       specs: {
         processor: "Intel Core i5-1135G7",
         ram: "8GB DDR4",
@@ -73,7 +68,7 @@ export default function App() {
       name: "لپتاپ لنوو ThinkPad E14",
       brand: "Lenovo",
       category: "بیزینس",
-      image: "https://cdn.productimages.ir/2023/04/06/7e0a9e7b.jpg", // عکس لپ‌تاپ واقعی
+      image: "https://cdn.productimages.ir/2023/04/06/7e0a9e7b.jpg",
       specs: {
         processor: "AMD Ryzen 5 5500U",
         ram: "16GB DDR4",
@@ -88,7 +83,7 @@ export default function App() {
       name: "لپتاپ دل Inspiron 15",
       brand: "Dell",
       category: "کاربری عمومی",
-      image: "https://cdn.productimages.ir/2023/04/06/2b0f9d3a.jpg", // عکس لپ‌تاپ واقعی
+      image: "https://cdn.productimages.ir/2023/04/06/2b0f9d3a.jpg",
       specs: {
         processor: "Intel Core i7-1165G7",
         ram: "16GB DDR4",
@@ -122,15 +117,7 @@ export default function App() {
     <div style={{ direction: 'rtl', minHeight: '100vh', background: '#f5f5f5' }}>
       <Header />
 
-      {/* --- محتوای اصلی سایت --- */}
-      <div style={{
-        maxWidth: 900,
-        margin: '32px auto',
-        padding: 24,
-        background: '#fff',
-        borderRadius: 12,
-        boxShadow: '0 2px 8px #eee'
-      }}>
+      <div className="kianshop-container">
         <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
           <input
             type="text"
@@ -150,61 +137,43 @@ export default function App() {
           </select>
         </div>
 
-        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div className="kianshop-products">
           {filteredLaptops.map(laptop => (
-            <div key={laptop.id} style={{
-              border: '1px solid #eee',
-              borderRadius: 8,
-              padding: 16,
-              width: 260,
-              background: '#fafafa',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center'
-            }}>
-              <img src={laptop.image} alt={laptop.name} style={{ width: '100%', borderRadius: 6, objectFit: 'cover', height: 150 }} />
-              <h3 style={{ margin: '12px 0 6px 0', textAlign: 'center' }}>{laptop.name}</h3>
-              <div style={{ fontSize: 14, color: '#555', textAlign: 'center' }}>دسته‌بندی: {laptop.category}</div>
-              <div style={{ margin: '8px 0', fontSize: 13, textAlign: 'center' }}>{laptop.summary}</div>
-              <div style={{ display: 'flex', gap: 8, margin: '8px 0' }}>
+            <div className="kianshop-card" key={laptop.id}>
+              <img src={laptop.image} alt={laptop.name} />
+              <h3>{laptop.name}</h3>
+              <div className="category">دسته‌بندی: {laptop.category}</div>
+              <div className="summary">{laptop.summary}</div>
+              <div className="actions">
                 <button
                   onClick={() => toggleExpand(laptop.id)}
-                  style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#43cea2', color: '#fff', cursor: 'pointer' }}
+                  style={{ background: '#43cea2', color: '#fff' }}
                 >
                   {expandedLaptopId === laptop.id ? 'بستن توضیحات' : 'توضیحات'}
                 </button>
                 <button
                   onClick={() => toggleCompare(laptop)}
-                  style={{
-                    padding: '6px 12px',
-                    borderRadius: 6,
-                    border: compareList.find(item => item.id === laptop.id) ? '2px solid #43cea2' : '1px solid #ccc',
-                    background: compareList.find(item => item.id === laptop.id) ? '#e0f7f1' : '#fafafa',
-                    color: '#185a9d',
-                    cursor: 'pointer'
-                  }}
+                  className={compareList.find(item => item.id === laptop.id) ? 'selected' : ''}
                 >
                   {compareList.find(item => item.id === laptop.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
                 </button>
               </div>
-              {/* توضیحات هر لپتاپ دقیقا زیر همان کارت */}
               {expandedLaptopId === laptop.id && (
-                <div style={{ marginTop: 12, background: '#f4fffa', borderRadius: 8, padding: 10, border: '1px solid #43cea2', width: '100%' }}>
-                  <ul style={{ textAlign: 'right', fontSize: 14, paddingRight: 16 }}>
+                <div className="kianshop-details">
+                  <ul>
                     <li>پردازنده: {laptop.specs.processor}</li>
                     <li>رم: {laptop.specs.ram}</li>
                     <li>حافظه: {laptop.specs.storage}</li>
                     <li>نمایشگر: {laptop.specs.display}</li>
                     <li>باتری: {laptop.specs.battery}</li>
                   </ul>
-                  <div style={{ marginTop: 8 }}>{laptop.summary}</div>
+                  <div>{laptop.summary}</div>
                 </div>
               )}
             </div>
           ))}
         </div>
 
-        {/* جدول مقایسه */}
         {compareList.length > 0 && (
           <div style={{ marginTop: 32 }}>
             <h3>مقایسه لپتاپ‌ها</h3>
