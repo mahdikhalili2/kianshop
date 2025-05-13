@@ -26,7 +26,7 @@ function Footer() {
   return (
     <footer>
       <div className="footer-contact">
-        آدرس: تهران، خیابان مثال، پلاک ۱۲۳ | تلفن: ۰۲۱-۱۲۳۴۵۶۷۸
+        آدرس: تهران، دکان کیانی وافع در مجتمع تجاری نور | تلفن: ۰۲۱-۱۲۳۴۵۶۷۸
       </div>
       <div className="footer-icons">
         <a href="https://wa.me/989123456789" target="_blank" rel="noopener noreferrer" title="واتساپ" style={{ color: '#25D366' }}>
