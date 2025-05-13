@@ -51,13 +51,14 @@ export default function App() {
   const [compareList, setCompareList] = useState([]);
   const [expandedLaptopId, setExpandedLaptopId] = useState(null);
 
+  // عکس‌های واقعی لپ‌تاپ (نمونه)
   const laptops = [
     {
       id: 1,
       name: "لپتاپ ایسوس مدل X509JA",
       brand: "ASUS",
       category: "کاربری عمومی",
-      image: "https://picsum.photos/id/1018/600/400",
+      image: "https://cdn.productimages.ir/2023/04/06/9d9b2b2e.jpg", // عکس لپ‌تاپ واقعی
       specs: {
         processor: "Intel Core i5-1135G7",
         ram: "8GB DDR4",
@@ -72,7 +73,7 @@ export default function App() {
       name: "لپتاپ لنوو ThinkPad E14",
       brand: "Lenovo",
       category: "بیزینس",
-      image: "https://picsum.photos/id/1015/600/400",
+      image: "https://cdn.productimages.ir/2023/04/06/7e0a9e7b.jpg", // عکس لپ‌تاپ واقعی
       specs: {
         processor: "AMD Ryzen 5 5500U",
         ram: "16GB DDR4",
@@ -87,7 +88,7 @@ export default function App() {
       name: "لپتاپ دل Inspiron 15",
       brand: "Dell",
       category: "کاربری عمومی",
-      image: "https://picsum.photos/id/1016/600/400",
+      image: "https://cdn.productimages.ir/2023/04/06/2b0f9d3a.jpg", // عکس لپ‌تاپ واقعی
       specs: {
         processor: "Intel Core i7-1165G7",
         ram: "16GB DDR4",
@@ -118,23 +119,30 @@ export default function App() {
   });
 
   return (
-    <div>
+    <div style={{ direction: 'rtl', minHeight: '100vh', background: '#f5f5f5' }}>
       <Header />
 
       {/* --- محتوای اصلی سایت --- */}
-      <div style={{ maxWidth: 900, margin: '32px auto', padding: 24, background: '#fff', borderRadius: 12, boxShadow: '0 2px 8px #eee' }}>
-        <div style={{ marginBottom: 16 }}>
+      <div style={{
+        maxWidth: 900,
+        margin: '32px auto',
+        padding: 24,
+        background: '#fff',
+        borderRadius: 12,
+        boxShadow: '0 2px 8px #eee'
+      }}>
+        <div style={{ marginBottom: 16, display: 'flex', alignItems: 'center', gap: 12 }}>
           <input
             type="text"
             placeholder="جستجوی لپتاپ..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            style={{ padding: 8, width: 200, borderRadius: 6, border: '1px solid #ccc' }}
+            style={{ padding: 8, width: 200, borderRadius: 6, border: '1px solid #ccc', fontFamily: 'inherit' }}
           />
           <select
             value={activeCategory}
             onChange={(e) => setActiveCategory(e.target.value)}
-            style={{ marginRight: 12, padding: 8, borderRadius: 6, border: '1px solid #ccc' }}
+            style={{ padding: 8, borderRadius: 6, border: '1px solid #ccc', fontFamily: 'inherit' }}
           >
             <option value="همه">همه</option>
             <option value="کاربری عمومی">کاربری عمومی</option>
@@ -142,37 +150,47 @@ export default function App() {
           </select>
         </div>
 
-        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+        <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', justifyContent: 'center' }}>
           {filteredLaptops.map(laptop => (
-            <div key={laptop.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: 16, width: 260, background: '#fafafa' }}>
-              <img src={laptop.image} alt={laptop.name} style={{ width: '100%', borderRadius: 6 }} />
-              <h3 style={{ margin: '12px 0 6px 0' }}>{laptop.name}</h3>
-              <div style={{ fontSize: 14, color: '#555' }}>دسته‌بندی: {laptop.category}</div>
-              <div style={{ margin: '8px 0', fontSize: 13 }}>{laptop.summary}</div>
-              <button
-                onClick={() => toggleExpand(laptop.id)}
-                style={{ margin: '8px 0', padding: '6px 12px', borderRadius: 6, border: 'none', background: '#43cea2', color: '#fff', cursor: 'pointer' }}
-              >
-                {expandedLaptopId === laptop.id ? 'بستن توضیحات' : 'توضیحات'}
-              </button>
-              <button
-                onClick={() => toggleCompare(laptop)}
-                style={{
-                  margin: '0 8px',
-                  padding: '6px 12px',
-                  borderRadius: 6,
-                  border: compareList.find(item => item.id === laptop.id) ? '2px solid #43cea2' : '1px solid #ccc',
-                  background: compareList.find(item => item.id === laptop.id) ? '#e0f7f1' : '#fafafa',
-                  color: '#185a9d',
-                  cursor: 'pointer'
-                }}
-              >
-                {compareList.find(item => item.id === laptop.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
-              </button>
+            <div key={laptop.id} style={{
+              border: '1px solid #eee',
+              borderRadius: 8,
+              padding: 16,
+              width: 260,
+              background: '#fafafa',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center'
+            }}>
+              <img src={laptop.image} alt={laptop.name} style={{ width: '100%', borderRadius: 6, objectFit: 'cover', height: 150 }} />
+              <h3 style={{ margin: '12px 0 6px 0', textAlign: 'center' }}>{laptop.name}</h3>
+              <div style={{ fontSize: 14, color: '#555', textAlign: 'center' }}>دسته‌بندی: {laptop.category}</div>
+              <div style={{ margin: '8px 0', fontSize: 13, textAlign: 'center' }}>{laptop.summary}</div>
+              <div style={{ display: 'flex', gap: 8, margin: '8px 0' }}>
+                <button
+                  onClick={() => toggleExpand(laptop.id)}
+                  style={{ padding: '6px 12px', borderRadius: 6, border: 'none', background: '#43cea2', color: '#fff', cursor: 'pointer' }}
+                >
+                  {expandedLaptopId === laptop.id ? 'بستن توضیحات' : 'توضیحات'}
+                </button>
+                <button
+                  onClick={() => toggleCompare(laptop)}
+                  style={{
+                    padding: '6px 12px',
+                    borderRadius: 6,
+                    border: compareList.find(item => item.id === laptop.id) ? '2px solid #43cea2' : '1px solid #ccc',
+                    background: compareList.find(item => item.id === laptop.id) ? '#e0f7f1' : '#fafafa',
+                    color: '#185a9d',
+                    cursor: 'pointer'
+                  }}
+                >
+                  {compareList.find(item => item.id === laptop.id) ? 'حذف از مقایسه' : 'افزودن به مقایسه'}
+                </button>
+              </div>
               {/* توضیحات هر لپتاپ دقیقا زیر همان کارت */}
               {expandedLaptopId === laptop.id && (
-                <div style={{ marginTop: 12, background: '#f4fffa', borderRadius: 8, padding: 10, border: '1px solid #43cea2' }}>
-                  <ul style={{ textAlign: 'right', fontSize: 14 }}>
+                <div style={{ marginTop: 12, background: '#f4fffa', borderRadius: 8, padding: 10, border: '1px solid #43cea2', width: '100%' }}>
+                  <ul style={{ textAlign: 'right', fontSize: 14, paddingRight: 16 }}>
                     <li>پردازنده: {laptop.specs.processor}</li>
                     <li>رم: {laptop.specs.ram}</li>
                     <li>حافظه: {laptop.specs.storage}</li>
